@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="openToogle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="navbar-collapse" [ngClass]="xxx" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" routerLink="/categorias" routerLinkActive="claseActiva">
+            Categorias
+          </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" routerLink="/subcategorias" routerLinkActive="active" ariaCurrentWhenActive="page" routerLinkActive="claseActiva">
+            Subcategorias
+          </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" routerLink="/productos" routerLinkActive="claseActiva">
+            Productos
+          </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page" routerLinkActive="claseActiva">
+            Usuarios
+          </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

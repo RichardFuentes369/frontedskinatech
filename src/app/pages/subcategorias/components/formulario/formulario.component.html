@@ -1,0 +1,29 @@
+<button class="btn btn-sm btn-primary me-2" (click)="openModel()">
+	<div>Crear subcategoria</div>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Subcategoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <span>Nombre categoria</span>
+                <input type="text" class="form-control">
+                <span>Estado categoria</span>
+                <select name="" id="" class="form-control">
+                  <option value="">--Seleccione--</option>
+                  <option value="">Activo</option>
+                  <option value="">Inactivo</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
