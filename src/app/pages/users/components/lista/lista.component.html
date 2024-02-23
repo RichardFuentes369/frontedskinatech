@@ -1,11 +1,11 @@
 <div class="col-sm-12 row mb-4">
     <div class="col-sm-6">
         <select name="" id="" class="form-control">
-    <option value="">Seleccione</option>
-    <option value="">Todo</option>
-    <option value="">Nombre</option>
-    <option value="">Estado</option>
-  </select>
+      <option value="">Seleccione</option>
+      <option value="">Todo</option>
+      <option value="">Nombre</option>
+      <option value="">Estado</option>
+    </select>
     </div>
     <div class="col-sm-6">
         <input type="text" class="form-control" placeholder="filtro">
@@ -19,7 +19,7 @@
             <th scope="col" class="text-center">#</th>
             <th scope="col" class="text-center">Nombre</th>
             <th scope="col" class="text-center">Estado</th>
-            <th scope="col" class="text-center">Opciones</th>
+            <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
         </tr>
     </thead>
     <tbody>
@@ -28,9 +28,9 @@
             <td class="text-center">Categoria 1</td>
             <td class="text-center">Activo</td>
             <td class="text-center">
-                <button class="btn btn-sm btn-primary m-2 ">Editar</button>
-                <button class="btn btn-sm btn-primary m-2 ">Eliminar</button>
-                <button class="btn btn-sm btn-primary m-2 ">Ver subcategorias</button>
+                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Editar</button>
+                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Eliminar</button>
+                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Ver subcategorias</button>
             </td>
         </tr>
     </tbody>

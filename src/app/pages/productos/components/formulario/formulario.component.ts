@@ -7,6 +7,9 @@ declare var bootstrap: any;
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent {
+
+  isAdmin:boolean = true
+
   ngOnInit(): void {
   }
 

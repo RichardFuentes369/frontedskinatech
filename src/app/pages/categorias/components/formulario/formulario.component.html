@@ -1,9 +1,9 @@
-<button class="btn btn-sm btn-primary me-2" (click)="openModel()">
+<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel()">
 	<div>Crear categoria</div>
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="isAdmin" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

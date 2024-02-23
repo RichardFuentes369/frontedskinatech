@@ -1,9 +1,9 @@
-<button class="btn btn-sm btn-primary me-2" (click)="openModel()">
-	<div>Crear producto</div>
+<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel()">
+	<div>Crear Producto</div>
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="isAdmin" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,9 +11,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <span>Nombre categoria</span>
+                <span>Nombre Producto</span>
                 <input type="text" class="form-control">
-                <span>Estado categoria</span>
+                <span>Estado Producto</span>
                 <select name="" id="" class="form-control">
                   <option value="">--Seleccione--</option>
                   <option value="">Activo</option>

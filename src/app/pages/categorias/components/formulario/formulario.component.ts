@@ -8,6 +8,7 @@ declare var bootstrap: any;
 })
 export class FormularioComponent  implements OnInit{
 
+  isAdmin:boolean = true
 
   ngOnInit(): void {
   }
