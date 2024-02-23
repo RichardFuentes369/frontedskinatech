@@ -13,7 +13,8 @@ import { UsersComponent } from '../pages/users/users.component';
 import { NoexisteComponent } from '../pages/noexiste/noexiste.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'productos', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'categorias', component: CategoriasComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'subcategorias', component: SubcategoriasComponent },

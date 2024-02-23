@@ -3,7 +3,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="openToogle()">
       <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="navbar-collapse" [ngClass]="xxx" id="navbarSupportedContent">
+
+        <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="ruta != 'login'">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/categorias" routerLinkActive="claseActiva">

@@ -1,14 +1,8 @@
-<app-globales-navbar *ngIf="logeado == true"></app-globales-navbar>
+<app-globales-navbar></app-globales-navbar>
 
-<div>
-    <br><br><br>
-    <div class="container" *ngIf="logeado == false">
-        <app-globales-login></app-globales-login>
-    </div>
-    <div class="container" *ngIf="logeado == true">
-        <router-outlet></router-outlet>
-    </div>
-    <br><br><br>
+<div class="container">
+    <br><br><br> ,
+    <router-outlet></router-outlet>
 </div>
 
 <app-globales-footer></app-globales-footer>

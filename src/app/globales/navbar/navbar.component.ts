@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-globales-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
+
+  ruta:string = ''
+
+  ngOnInit(): void {
+    let ruta = window.location.pathname
+    let partesRuta = ruta.split('/');
+    this.ruta = partesRuta[1]
+  }
+
 
   xxx = 'collapse'
 
