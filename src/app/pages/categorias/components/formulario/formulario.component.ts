@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CategoriaService } from '../../service/categoria.service';
 declare var bootstrap: any;
 
 @Component({
@@ -8,29 +9,43 @@ declare var bootstrap: any;
 })
 export class FormularioComponent  implements OnInit{
 
+  @Output() categoriaGuardada: EventEmitter<void> = new EventEmitter<void>();
+
+  myModal: any;
   isAdmin:boolean = true
 
   model = {
     nombre : '',
-    activo : 0
+    estado : 0
   }
 
   limpiarModal(){
-    this.model.activo = 0
+    this.model.estado = 0
     this.model.nombre = ''
   }
 
+  constructor(private servicio: CategoriaService) { }
+
   ngOnInit(): void {
+    this.myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
   }
 
   openModel(){
     this.limpiarModal()
-    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    myModal.show();
+    this.myModal.show();
+  }
+
+  closeModel(){
+    this.myModal.hide();
   }
 
   guardarCategoria(){
-    console.log('guardando categoria')
+    this.servicio
+    .create(this.model)
+    .subscribe(() => {
+      this.closeModel()
+      this.categoriaGuardada.emit();
+    });
   }
 
 }

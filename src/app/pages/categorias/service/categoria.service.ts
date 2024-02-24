@@ -21,10 +21,9 @@ export class CategoriaService {
     return this.http.delete(`${this.baseUrl}/api/categoria/eliminar-categoria/${id}`);
   }
 
-
-  // create(data: any): Observable<any> {
-  //   return this.http.post(baseUrl, data);
-  // }
+  create(data: any) {
+    return this.http.post(`${this.baseUrl}/api/categoria/agregar-categoria`, data);
+  }
 
   // update(id: any, data: any): Observable<any> {
   //   return this.http.put(`${baseUrl}/${id}`, data);

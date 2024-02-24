@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { CategoriaService } from '../../service/categoria.service'
 
@@ -70,4 +70,5 @@ export class ListaComponent implements OnInit {
       this.obtenerCategorias()
     });
   }
+
 }
