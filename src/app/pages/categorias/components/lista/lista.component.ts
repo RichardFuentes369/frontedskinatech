@@ -57,6 +57,7 @@ export class ListaComponent implements OnInit {
   }
 
   async filtro(){
+    this.page = 1
     this.filtro_field = this.filtroelemento
     this.filtro_word = this.filtropalabra
     this.obtenerCategorias()

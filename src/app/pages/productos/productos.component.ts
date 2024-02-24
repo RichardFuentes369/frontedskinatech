@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ListaComponent as ListaComponentProducto } from './components/lista/lista.component';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class ProductosComponent {
 
+  ngOnInit(): void {
+  }
+
+  @ViewChild(ListaComponentProducto) child:any;
+  productoGuardado() {
+    this.child.obtenerProductos();
+  }
 }

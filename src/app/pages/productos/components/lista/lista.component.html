@@ -1,18 +1,52 @@
 <div class="col-sm-12 row mb-4">
-    <div class="col-sm-6">
-        <select name="" id="" class="form-control">
+    <div class="col-sm-5">
+        <select [(ngModel)]="filtroelemento" class="form-control">
       <option value="">Seleccione</option>
-      <option value="">Todo</option>
-      <option value="">Nombre</option>
-      <option value="">Estado</option>
+      <option value="id">Id</option>
+      <option value="name">Nombre</option>
+      <option value="status">Estado</option>
     </select>
     </div>
-    <div class="col-sm-6">
-        <input type="text" class="form-control" placeholder="filtro">
+    <div class="col-sm-5">
+        <input type="text" class="form-control" placeholder="busqueda" [(ngModel)]="filtropalabra">
+    </div>
+    <div class="col-sm text-center m-auto">
+        <button class="btn btn-sm btn-secondary" (click)="filtro()">
+        Buscar
+      </button>
     </div>
 </div>
 
-<h3 class="text-center">Lista de categorias</h3>
+<h3 class="text-center">Lista de producto</h3>
+
+<div class="col-sm-12 text-end">
+    <select class="btn-group-vertical m-2" [(ngModel)]="field" (change)="cambiarSort()">
+    <option value="id" selected>id</option>
+    <option value="name">nombre</option>
+    <option value="status">estado</option>
+  </select>
+    <select class="btn-group-vertical m-2" [(ngModel)]="order" (change)="cambiarSort()">
+    <option value="asc" selected>asc</option>
+    <option value="desc">desc</option>
+  </select>
+    <select class="btn-group-vertical m-2" [(ngModel)]="perPage" (change)="cambiarPaginacion()">
+    <option value="5" selected>5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+    <button class="btn btn-sm btn-primary m-2" (click)="disminuir()" [ngClass]="{
+    'disabled': productos.response.back == null
+  }"><<</button>
+    <button class="btn btn-sm btn-primary m-2" (click)="aumentar()" [ngClass]="{
+    'disabled': productos.response.next == null
+  }">>></button>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,14 +57,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row" class="text-center">1</th>
-            <td class="text-center">Categoria 1</td>
-            <td class="text-center">Activo</td>
+        <tr *ngFor="let item of productos.response.data">
+            <th scope="row" class="text-center">{{item.id}}</th>
+            <td class="text-center">{{item.name}}</td>
+            <td class="text-center">{{item.status}}</td>
             <td class="text-center">
                 <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Editar</button>
-                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Eliminar</button>
-                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Ver subcategorias</button>
+                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin" (click)="eliminar(item.id)">Eliminar</button>
+                <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin">Ver subproducto</button>
             </td>
         </tr>
     </tbody>

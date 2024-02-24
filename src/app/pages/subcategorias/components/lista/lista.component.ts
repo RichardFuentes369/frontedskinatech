@@ -56,6 +56,7 @@ export class ListaComponent {
   }
 
   async filtro(){
+    this.page = 1
     this.filtro_field = this.filtroelemento
     this.filtro_word = this.filtropalabra
     this.obtenerSubcategoria()
