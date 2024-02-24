@@ -61,4 +61,13 @@ export class ListaComponent implements OnInit {
     this.filtro_word = this.filtropalabra
     this.obtenerCategorias()
   }
+
+  async eliminar(id: number){
+    this.servicio
+    .delete(id)
+    .subscribe(() => {
+      this.page = 1
+      this.obtenerCategorias()
+    });
+  }
 }
