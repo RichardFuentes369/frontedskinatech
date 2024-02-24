@@ -27,7 +27,7 @@ export class FormularioComponent  implements OnInit{
   constructor(private servicio: CategoriaService) { }
 
   ngOnInit(): void {
-    this.myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    this.myModal = new bootstrap.Modal(document.getElementById('modalCategoria'));
   }
 
   openModel(){

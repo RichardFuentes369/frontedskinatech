@@ -3,26 +3,26 @@
 </button>
 
 <!-- Modal -->
-<div *ngIf="isAdmin" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="isAdmin" class="modal fade" id="modalSubcategoria" tabindex="-1" aria-labelledby="modalSubcategoriaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Subcategoria</h5>
+                <h5 class="modal-title" id="modalSubcategoriaLabel">Agregar Subcategoria</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <span>Nombre Subcategoria</span>
-                <input type="text" class="form-control">
-                <span>Estado Subcategoria</span>
-                <select name="" id="" class="form-control">
-                  <option value="">--Seleccione--</option>
-                  <option value="">Activo</option>
-                  <option value="">Inactivo</option>
+                <span>Nombre subcategoria</span>
+                <input type="text" class="form-control" [(ngModel)]="model.nombre">
+                <span>Estado subcategoria</span>
+                <select name="" id="" class="form-control" [(ngModel)]="model.estado">
+                  <option value="0" selected>--Seleccione--</option>
+                  <option value="1">Activo</option>
+                  <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="guardarSubategoria()">Guardar</button>
             </div>
         </div>
     </div>
