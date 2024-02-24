@@ -10,12 +10,27 @@ export class FormularioComponent  implements OnInit{
 
   isAdmin:boolean = true
 
+  model = {
+    nombre : '',
+    activo : 0
+  }
+
+  limpiarModal(){
+    this.model.activo = 0
+    this.model.nombre = ''
+  }
+
   ngOnInit(): void {
   }
 
   openModel(){
+    this.limpiarModal()
     var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
     myModal.show();
+  }
+
+  guardarCategoria(){
+    console.log('guardando categoria')
   }
 
 }

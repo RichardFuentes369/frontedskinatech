@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
 @Component({
   selector: 'app-globales-navbar',
   templateUrl: './navbar.component.html',
@@ -16,11 +14,11 @@ export class NavbarComponent implements OnInit{
     this.ruta = partesRuta[1]
   }
 
-
   xxx = 'collapse'
 
   openToogle(){
     this.xxx ===  (this.xxx = '') ? this.xxx = 'collapse' : this.xxx = ''
   }
+
 
 }

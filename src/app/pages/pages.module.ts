@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 
 import { ListaComponent as CategoriaList} from './categorias/components/lista/lista.component';
 import { FormularioComponent as CategoriaFormulario} from './categorias/components/formulario/formulario.component'
+import { CategoriaService } from './categorias/service/categoria.service'
 
 import { ListaComponent as ProductoList} from './productos/components/lista/lista.component'
 import { FormularioComponent as ProductoFormulario} from './productos/components/formulario/formulario.component';
@@ -49,5 +50,8 @@ import { FormularioComponent as UsuarioFormulario } from './users/components/for
     CommonModule,
     FormsModule
   ],
+  providers: [
+    CategoriaService
+  ]
 })
 export class PagesModule { }

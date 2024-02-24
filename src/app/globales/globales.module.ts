@@ -37,6 +37,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     CommonModule
+  ],
+  providers: [
+
   ]
 })
 export class GlobalesModule { }
