@@ -13,7 +13,6 @@ import { FooterComponent } from './footer/footer.component';
 import { CategoriasComponent } from '../pages/categorias/categorias.component';
 import { ProductosComponent } from '../pages/productos/productos.component';
 import { SubcategoriasComponent } from '../pages/subcategorias/subcategorias.component';
-import { UsersComponent } from '../pages/users/users.component';
 import { NoexisteComponent } from '../pages/noexiste/noexiste.component';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'subcategorias', component: SubcategoriasComponent },
-  { path: 'users', component: UsersComponent },
   { path: '**', component: NoexisteComponent, }
 ];
 
