@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit{
 
   user:any = [];
 
-  username = ''
-  password = ''
+  username = 'admin1@gmail.com'
+  password = 'Qwerty9601'
 
 
   constructor(private servicio: LoginService, private router: Router) { }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductosService } from '../../service/productos.service'
 
 @Component({
@@ -8,6 +8,8 @@ import { ProductosService } from '../../service/productos.service'
   styleUrl: './lista.component.css'
 })
 export class ListaComponent {
+
+  @Output() editarProducto: EventEmitter<number> = new EventEmitter<number>();
 
   isAdmin:boolean = true;
   productos:any = [];
@@ -22,20 +24,23 @@ export class ListaComponent {
   filtroelemento = ''
   filtropalabra = ''
 
-  constructor(private servicio: ProductosService) { }
+  constructor(private servicio: ProductosService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerProductos()
+
+    if(localStorage.getItem('rol') == 'basico'){
+      this.isAdmin = false
+    }
   }
 
 
   async obtenerProductos(){
+    let token = localStorage.getItem('token')
     this.productos = []
-    this.servicio
-    .getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word)
-    .subscribe((producto: any) => {
-      this.productos = producto
-    });
+    if(token){
+      this.productos = await this.servicio.getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word, token).toPromise()
+    }
   }
 
   async aumentar(){
@@ -64,14 +69,29 @@ export class ListaComponent {
     this.obtenerProductos()
   }
 
-  async eliminar(id: number){
-    this.servicio
-    .delete(id)
-    .subscribe(() => {
-      this.page = 1
-      this.obtenerProductos()
-    });
+  editar(id: number){
+    this.editarProducto.emit(id);
   }
+
+  async eliminar(id: number){
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.delete(id, token).toPromise()
+      .then((response) => {
+        this.page = 1
+        this.obtenerProductos()
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      });
+    }else{
+
+      this.router.navigate(['/login']);
+    }
+  }
+
 
 }
 

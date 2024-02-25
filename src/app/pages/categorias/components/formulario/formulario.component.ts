@@ -44,12 +44,21 @@ export class FormularioComponent  implements OnInit{
     if(id){
       let token = localStorage.getItem('token')
       if(token){
-        this.dataEdit = await this.servicio.getCategory(id, token).toPromise()
-        this.mostrarCrear=false
-        this.model.id = this.dataEdit.response.id
-        this.model.nombre = this.dataEdit.response.name
-        this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
-        this.myModal.show();
+        await this.servicio.getCategory(id, token).toPromise()
+        .then((response) => {
+          this.dataEdit = response
+          this.mostrarCrear=false
+          this.model.id = this.dataEdit.response.id
+          this.model.nombre = this.dataEdit.response.name
+          this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
+          this.myModal.show();
+        })
+        .catch((error) => {
+          if (error.status === 401) {
+            this.closeModel()
+            this.router.navigate(['/login']);
+          }
+        });
       }else{
         this.closeModel()
         this.router.navigate(['/login']);
@@ -68,8 +77,16 @@ export class FormularioComponent  implements OnInit{
     let token = localStorage.getItem('token')
     if(token){
       await this.servicio.create(this.model, token).toPromise()
-      this.closeModel()
-      this.categoriaGuardada.emit();
+      .then((response) => {
+        this.closeModel()
+        this.categoriaGuardada.emit();
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.closeModel()
+          this.router.navigate(['/login']);
+        }
+      });
     }else{
       this.closeModel()
       this.router.navigate(['/login']);
@@ -80,8 +97,16 @@ export class FormularioComponent  implements OnInit{
     let token = localStorage.getItem('token')
     if(token){
       await this.servicio.update(this.model, token).toPromise()
-      this.closeModel()
-      this.categoriaGuardada.emit();
+      .then((response) => {
+        this.closeModel()
+        this.categoriaGuardada.emit();
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.closeModel()
+          this.router.navigate(['/login']);
+        }
+      });
     }else{
       this.closeModel()
       this.router.navigate(['/login']);

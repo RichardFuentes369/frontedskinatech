@@ -1,9 +1,9 @@
-<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel()">
+<button class="btn btn-sm btn-primary me-2" (click)="openModel('')" *ngIf="isAdmin">
 	<div>Crear producto</div>
 </button>
 
 <!-- Modal -->
-<div *ngIf="isAdmin" class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
+<div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProductoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +22,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="guardarProducto()">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="guardarProducto()" *ngIf="mostrarCrear == true">Crear</button>
+                <button type="button" class="btn btn-primary" (click)="editarProducto()" *ngIf="mostrarCrear == false">Editar</button>
             </div>
         </div>
     </div>

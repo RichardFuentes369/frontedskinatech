@@ -76,10 +76,16 @@ export class ListaComponent implements OnInit {
     let token = localStorage.getItem('token')
     if(token){
       await this.servicio.delete(id, token).toPromise()
-      this.page = 1
-      this.obtenerCategorias()
+      .then((response) => {
+        this.page = 1
+        this.obtenerCategorias()
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      });
     }else{
-
       this.router.navigate(['/login']);
     }
   }
