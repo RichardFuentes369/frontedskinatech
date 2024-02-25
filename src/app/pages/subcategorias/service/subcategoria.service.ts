@@ -17,6 +17,10 @@ export class SubcategoriaService {
     return this.http.get(`${this.baseUrl}/api/subcategoria/listar-subcategoria?page=${page}&perPage=${perPage}&order=${order}&field=${field}&filtro_field=${filtro_field}&filtro_word=${filtro_word}`);
   }
 
+  getSubcategory(id: number){
+    return this.http.get(`${this.baseUrl}/api/subcategoria/obtener-subcategoria/${id}`);
+  }
+
   delete(id: any){
     return this.http.delete(`${this.baseUrl}/api/subcategoria/eliminar-subcategoria/${id}`);
   }
@@ -25,12 +29,14 @@ export class SubcategoriaService {
     return this.http.post(`${this.baseUrl}/api/subcategoria/agregar-subcategoria`, data);
   }
 
-  // update(id: any, data: any): Observable<any> {
-  //   return this.http.put(`${baseUrl}/${id}`, data);
-  // }
-
-  // delete(id: any): Observable<any> {
-  //   return this.http.delete(`${baseUrl}/${id}`);
-  // }
+  update(data: any) {
+    if(data.estado == 1 || data.estado == '1'){
+      data.estado = 'activo'
+    }
+    if(data.estado == 2 || data.estado == '2'){
+      data.estado = 'inactivo'
+    }
+    return this.http.put(`${this.baseUrl}/api/subcategoria/editar-subcategoria/${data.id}`, data);
+  }
 
 }

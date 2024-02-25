@@ -17,13 +17,13 @@ export class FormularioComponent  implements OnInit{
   mostrarCrear = true
 
   model = {
-    id : 0,
+    id : '',
     nombre : '',
     estado : 0
   }
 
   limpiarModal(){
-    this.model.id = 0
+    this.model.id = ''
     this.model.estado = 0
     this.mostrarCrear=true
     this.model.nombre = ''
@@ -68,6 +68,7 @@ export class FormularioComponent  implements OnInit{
   }
 
   editarCategoria(){
+    this.model.estado.toString()
     this.servicio
     .update(this.model)
     .subscribe(() => {

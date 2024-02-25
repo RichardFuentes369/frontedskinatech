@@ -30,12 +30,13 @@ export class CategoriaService {
   }
 
   update(data: any) {
-    if(data.status == 1){
+    if(data.estado == 1 || data.estado == '1'){
       data.estado = 'activo'
     }
-    if(data.status == 2){
+    if(data.estado == 2 || data.estado == '2'){
       data.estado = 'inactivo'
     }
+
     return this.http.put(`${this.baseUrl}/api/categoria/editar-categoria/${data.id}`, data);
   }
 
