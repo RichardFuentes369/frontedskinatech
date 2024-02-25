@@ -16,10 +16,13 @@ export class FormularioComponent  implements OnInit{
   isAdmin:boolean = true
   mostrarCrear = true
 
+  categoria: any;
+
   model = {
     id : '',
     nombre : '',
-    estado : 0
+    estado : 0,
+    subcategoria: 0
   }
 
   limpiarModal(){
@@ -27,12 +30,18 @@ export class FormularioComponent  implements OnInit{
     this.model.estado = 0
     this.mostrarCrear=true
     this.model.nombre = ''
+    this.model.subcategoria = 0
   }
 
   constructor(private servicio: SubcategoriaService) { }
 
   ngOnInit(): void {
     this.myModal = new bootstrap.Modal(document.getElementById('modalSubcategoria'));
+    this.servicio.getCategoriaAll().subscribe((data) => {
+      setTimeout(() => {
+        this.categoria = data
+      }, 100);
+    });
   }
 
   async openModel(id: any){
@@ -45,6 +54,7 @@ export class FormularioComponent  implements OnInit{
           this.model.id = this.dataEdit.response.id
           this.model.nombre = this.dataEdit.response.name
           this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
+          this.model.subcategoria = this.dataEdit.response.categoria_id
           this.myModal.show();
         }, 100);
       });

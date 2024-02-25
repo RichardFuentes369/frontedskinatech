@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ListaComponent as ListaComponentCategorias } from './components/lista/lista.component';
 import { FormularioComponent as FormularioComponentCategorias } from './components/formulario/formulario.component';
+import { CategoriaService } from './service/categoria.service';
 
 @Component({
   selector: 'app-categorias',
@@ -9,7 +11,23 @@ import { FormularioComponent as FormularioComponentCategorias } from './componen
 })
 export class CategoriasComponent implements OnInit {
 
-  ngOnInit(): void {
+  user:any = [];
+
+  constructor(private servicio: CategoriaService, private router: Router) { }
+
+  async ngOnInit() {
+    let token = localStorage.getItem('token')
+    if(token){
+      this.user = await this.servicio.userProfile(token).toPromise()
+      if(this.user){
+        this.router.navigate(['/categorias']);
+        localStorage.setItem('rol', this.user.rol)
+      }else{
+        this.router.navigate(['/login']);
+      }
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
 
   @ViewChild(ListaComponentCategorias) child:any;

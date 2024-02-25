@@ -32,6 +32,9 @@ export class FormularioComponent  implements OnInit{
   constructor(private servicio: CategoriaService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('rol') == 'basico'){
+      this.isAdmin = false
+    }
     this.myModal = new bootstrap.Modal(document.getElementById('modalCategoria'));
   }
 

@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SubcategoriaService } from '../../service/subcategoria.service'
 @Component({
   selector: 'app-component-subcategorias-lista',
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css'
 })
-export class ListaComponent {
+export class ListaComponent implements OnInit {
 
   @Output() editarSubcategoria: EventEmitter<number> = new EventEmitter<number>();
 
@@ -23,19 +23,20 @@ export class ListaComponent {
   filtroelemento = ''
   filtropalabra = ''
 
-  constructor(private servicio: SubcategoriaService) { }
+  constructor(private servicio: SubcategoriaService, private router: Router) { }
 
   ngOnInit(): void {
-    this.obtenerSubcategoria()
+    let token = localStorage.getItem('token')
+    if(token){
+      this.obtenerSubcategoria()
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
 
   async obtenerSubcategoria(){
     this.subcategorias = []
-    this.servicio
-    .getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word)
-    .subscribe((subcategoria: any) => {
-      this.subcategorias = subcategoria
-    });
+    this.subcategorias = await this.servicio.getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word).toPromise()
   }
 
   async aumentar(){

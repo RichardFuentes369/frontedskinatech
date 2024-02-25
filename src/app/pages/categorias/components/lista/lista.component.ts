@@ -28,6 +28,10 @@ export class ListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCategorias()
+
+    if(localStorage.getItem('rol') == 'basico'){
+      this.isAdmin = false
+    }
   }
 
   async obtenerCategorias(){

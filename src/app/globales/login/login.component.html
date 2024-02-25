@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row mt-2">
         <span>Correo</span>
-        <input type="email" class="form-control" placeholder="example@correo.com">
+        <input type="email" class="form-control" placeholder="example@correo.com" [(ngModel)]="username">
     </div>
     <div class="row mt-2">
         <span>Contraseña</span>
-        <input type="password" class="form-control" placeholder="password">
+        <input type="password" class="form-control" placeholder="password" [(ngModel)]="password">
     </div>
     <div class="row mt-2">
-        <button class="btn btn-sm btn-primary">
+        <button class="btn btn-sm btn-primary" (click)="ingresar()">
           Ingresar
         </button>
     </div>

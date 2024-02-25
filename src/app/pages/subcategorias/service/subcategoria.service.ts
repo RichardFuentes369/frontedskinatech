@@ -17,6 +17,10 @@ export class SubcategoriaService {
     return this.http.get(`${this.baseUrl}/api/subcategoria/listar-subcategoria?page=${page}&perPage=${perPage}&order=${order}&field=${field}&filtro_field=${filtro_field}&filtro_word=${filtro_word}`);
   }
 
+  getCategoriaAll(){
+    return this.http.get(`${this.baseUrl}/api/categoria/getAll`);
+  }
+
   getSubcategory(id: number){
     return this.http.get(`${this.baseUrl}/api/subcategoria/obtener-subcategoria/${id}`);
   }

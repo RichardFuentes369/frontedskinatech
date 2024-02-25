@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from './service/navbar.service';
 @Component({
   selector: 'app-globales-navbar',
   templateUrl: './navbar.component.html',
@@ -7,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit{
 
   ruta:string = ''
+  user:any = []
 
-  ngOnInit(): void {
-    let ruta = window.location.pathname
-    let partesRuta = ruta.split('/');
-    this.ruta = partesRuta[1]
+
+  constructor(private servicio: NavbarService) { }
+
+  async ngOnInit() {
+    await this.loginInicial()
   }
 
   xxx = 'collapse'
@@ -20,5 +23,22 @@ export class NavbarComponent implements OnInit{
     this.xxx ===  (this.xxx = '') ? this.xxx = 'collapse' : this.xxx = ''
   }
 
+  async loginInicial(){
+    this.user = []
+    let token: any = localStorage.getItem('token')
+    if(token){
+      this.user = await this.servicio.userProfile(token).toPromise()
+    }
+
+    if(this.user){
+      this.ruta = 'categorias'
+    }else{
+      let ruta = window.location.pathname
+      let partesRuta = ruta.split('/');
+      this.ruta = partesRuta[1]
+    }
+  }
+
 
 }
+

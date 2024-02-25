@@ -19,6 +19,11 @@
                   <option value="1">Activo</option>
                   <option value="2">Inactivo</option>
                 </select>
+                <span>Categoria</span>
+                <select name="" id="" class="form-control" [(ngModel)]="model.subcategoria">
+                  <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
+                  <option value="{{item.id}}" *ngFor="let item of categoria.response">{{item.name}}</option>
+                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
