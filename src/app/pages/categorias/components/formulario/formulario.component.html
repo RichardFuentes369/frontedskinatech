@@ -1,4 +1,4 @@
-<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel()">
+<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel('')">
 	<div>Crear categoria</div>
 </button>
 
@@ -7,7 +7,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalCategoriaLabel">Agregar Categoria</h5>
+                <h5 class="modal-title" id="modalCategoriaLabel"> Categoria</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -15,14 +15,15 @@
                 <input type="text" class="form-control" [(ngModel)]="model.nombre">
                 <span>Estado categoria</span>
                 <select name="" id="" class="form-control" [(ngModel)]="model.estado">
-                  <option value="0" selected>--Seleccione--</option>
+                  <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
                   <option value="1">Activo</option>
                   <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="guardarCategoria()">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="guardarCategoria()" *ngIf="mostrarCrear == true">Crear</button>
+                <button type="button" class="btn btn-primary" (click)="editarCategoria()" *ngIf="mostrarCrear == false">Editar</button>
             </div>
         </div>
     </div>

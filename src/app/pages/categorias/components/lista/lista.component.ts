@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { CategoriaService } from '../../service/categoria.service'
 
@@ -8,6 +8,8 @@ import { CategoriaService } from '../../service/categoria.service'
   styleUrl: './lista.component.css'
 })
 export class ListaComponent implements OnInit {
+
+  @Output() editarCategoria: EventEmitter<number> = new EventEmitter<number>();
 
   isAdmin:boolean = true;
   categorias:any = [];
@@ -61,6 +63,10 @@ export class ListaComponent implements OnInit {
     this.filtro_field = this.filtroelemento
     this.filtro_word = this.filtropalabra
     this.obtenerCategorias()
+  }
+
+  editar(id: number){
+    this.editarCategoria.emit(id);
   }
 
   async eliminar(id: number){

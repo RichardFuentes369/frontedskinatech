@@ -17,6 +17,10 @@ export class CategoriaService {
     return this.http.get(`${this.baseUrl}/api/categoria/listar-categoria?page=${page}&perPage=${perPage}&order=${order}&field=${field}&filtro_field=${filtro_field}&filtro_word=${filtro_word}`);
   }
 
+  getCategory(id: number){
+    return this.http.get(`${this.baseUrl}/api/categoria/obtener-categoria/${id}`);
+  }
+
   delete(id: any){
     return this.http.delete(`${this.baseUrl}/api/categoria/eliminar-categoria/${id}`);
   }
@@ -25,12 +29,14 @@ export class CategoriaService {
     return this.http.post(`${this.baseUrl}/api/categoria/agregar-categoria`, data);
   }
 
-  // update(id: any, data: any): Observable<any> {
-  //   return this.http.put(`${baseUrl}/${id}`, data);
-  // }
-
-  // delete(id: any): Observable<any> {
-  //   return this.http.delete(`${baseUrl}/${id}`);
-  // }
+  update(data: any) {
+    if(data.status == 1){
+      data.estado = 'activo'
+    }
+    if(data.status == 2){
+      data.estado = 'inactivo'
+    }
+    return this.http.put(`${this.baseUrl}/api/categoria/editar-categoria/${data.id}`, data);
+  }
 
 }
