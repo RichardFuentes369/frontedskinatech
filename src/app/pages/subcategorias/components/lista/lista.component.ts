@@ -33,8 +33,11 @@ export class ListaComponent implements OnInit {
   }
 
   async obtenerSubcategoria(){
+    let token = localStorage.getItem('token')
     this.subcategorias = []
-    this.subcategorias = await this.servicio.getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word).toPromise()
+    if(token){
+      this.subcategorias = await this.servicio.getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word, token).toPromise()
+    }
   }
 
   async aumentar(){
@@ -69,12 +72,15 @@ export class ListaComponent implements OnInit {
   }
 
   async eliminar(id: number){
-    this.servicio
-    .delete(id)
-    .subscribe(() => {
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.delete(id, token).toPromise()
       this.page = 1
       this.obtenerSubcategoria()
-    });
+    }else{
+
+      this.router.navigate(['/login']);
+    }
   }
 
 }

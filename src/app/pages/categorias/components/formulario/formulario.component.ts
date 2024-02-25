@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriaService } from '../../service/categoria.service';
 declare var bootstrap: any;
 
@@ -29,7 +30,7 @@ export class FormularioComponent  implements OnInit{
     this.model.nombre = ''
   }
 
-  constructor(private servicio: CategoriaService) { }
+  constructor(private servicio: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('rol') == 'basico'){
@@ -41,16 +42,18 @@ export class FormularioComponent  implements OnInit{
   async openModel(id: any){
     this.limpiarModal()
     if(id){
-      await this.servicio.getCategory(id).subscribe((data) => {
-        setTimeout(() => {
-          this.dataEdit = data;
-          this.mostrarCrear=false
-          this.model.id = this.dataEdit.response.id
-          this.model.nombre = this.dataEdit.response.name
-          this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
-          this.myModal.show();
-        }, 100);
-      });
+      let token = localStorage.getItem('token')
+      if(token){
+        this.dataEdit = await this.servicio.getCategory(id, token).toPromise()
+        this.mostrarCrear=false
+        this.model.id = this.dataEdit.response.id
+        this.model.nombre = this.dataEdit.response.name
+        this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
+        this.myModal.show();
+      }else{
+        this.closeModel()
+        this.router.navigate(['/login']);
+      }
     }else{
       this.limpiarModal()
       this.myModal.show();
@@ -61,22 +64,27 @@ export class FormularioComponent  implements OnInit{
     this.myModal.hide();
   }
 
-  guardarCategoria(){
-    this.servicio
-    .create(this.model)
-    .subscribe(() => {
+  async guardarCategoria(){
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.create(this.model, token).toPromise()
       this.closeModel()
       this.categoriaGuardada.emit();
-    });
+    }else{
+      this.closeModel()
+      this.router.navigate(['/login']);
+    }
   }
 
-  editarCategoria(){
-    this.model.estado.toString()
-    this.servicio
-    .update(this.model)
-    .subscribe(() => {
+  async editarCategoria(){
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.update(this.model, token).toPromise()
       this.closeModel()
       this.categoriaGuardada.emit();
-    });
+    }else{
+      this.closeModel()
+      this.router.navigate(['/login']);
+    }
   }
 }

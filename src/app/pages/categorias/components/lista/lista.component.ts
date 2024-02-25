@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { CategoriaService } from '../../service/categoria.service'
 
 @Component({
@@ -24,7 +24,7 @@ export class ListaComponent implements OnInit {
   filtroelemento = ''
   filtropalabra = ''
 
-  constructor(private servicio: CategoriaService) { }
+  constructor(private servicio: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerCategorias()
@@ -35,12 +35,11 @@ export class ListaComponent implements OnInit {
   }
 
   async obtenerCategorias(){
+    let token = localStorage.getItem('token')
     this.categorias = []
-    this.servicio
-    .getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word)
-    .subscribe((categoria: any) => {
-      this.categorias = categoria
-    });
+    if(token){
+      this.categorias = await this.servicio.getAll(this.page, this.perPage, this.order, this.field, this.filtro_field, this.filtro_word, token).toPromise()
+    }
   }
 
   async aumentar(){
@@ -74,12 +73,15 @@ export class ListaComponent implements OnInit {
   }
 
   async eliminar(id: number){
-    this.servicio
-    .delete(id)
-    .subscribe(() => {
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.delete(id, token).toPromise()
       this.page = 1
       this.obtenerCategorias()
-    });
+    }else{
+
+      this.router.navigate(['/login']);
+    }
   }
 
 }

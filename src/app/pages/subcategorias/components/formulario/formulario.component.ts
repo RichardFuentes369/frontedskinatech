@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SubcategoriaService } from '../../service/subcategoria.service';
 declare var bootstrap: any;
 
@@ -33,7 +34,7 @@ export class FormularioComponent  implements OnInit{
     this.model.subcategoria = 0
   }
 
-  constructor(private servicio: SubcategoriaService) { }
+  constructor(private servicio: SubcategoriaService, private router: Router) { }
 
   async ngOnInit() {
     if(localStorage.getItem('rol') == 'basico'){
@@ -45,13 +46,19 @@ export class FormularioComponent  implements OnInit{
   async openModel(id: any){
     this.limpiarModal()
     if(id){
-      this.dataEdit = await this.servicio.getSubcategory(id).toPromise()
-      this.mostrarCrear = false
-      this.model.id = this.dataEdit.response.id
-      this.model.nombre = this.dataEdit.response.name
-      this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
-      this.model.subcategoria = this.dataEdit.response.categoria_id
-      this.myModal.show();
+      let token = localStorage.getItem('token')
+      if(token){
+        this.dataEdit = await this.servicio.getSubcategory(id, token).toPromise()
+        this.mostrarCrear = false
+        this.model.id = this.dataEdit.response.id
+        this.model.nombre = this.dataEdit.response.name
+        this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
+        this.model.subcategoria = this.dataEdit.response.categoria_id.toString()
+        this.myModal.show();
+      }else{
+        this.closeModel()
+        this.router.navigate(['/login']);
+      }
     }else{
       this.limpiarModal()
       this.myModal.show();
@@ -62,21 +69,29 @@ export class FormularioComponent  implements OnInit{
     this.myModal.hide();
   }
 
-  guardarSubategoria(){
-    this.servicio
-    .create(this.model)
-    .subscribe(() => {
+  async guardarSubategoria(){
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.create(this.model, token).toPromise()
       this.closeModel()
       this.subcategoriaGuardada.emit();
-    });
+    }else{
+      this.closeModel()
+      this.router.navigate(['/login']);
+    }
   }
 
-  editarSubcategoria(){
-    this.servicio
-    .update(this.model)
-    .subscribe(() => {
+
+  async editarSubcategoria(){
+
+    let token = localStorage.getItem('token')
+    if(token){
+      await this.servicio.update(this.model, token).toPromise()
       this.closeModel()
       this.subcategoriaGuardada.emit();
-    });
+    }else{
+      this.closeModel()
+      this.router.navigate(['/login']);
+    }
   }
 }
