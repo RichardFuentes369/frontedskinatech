@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { environments } from '../../../../enviroments/enviroments';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders  } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubcategoriaService {
-
 
   private baseUrl: string = environments.baseUrl;
 
@@ -41,6 +40,17 @@ export class SubcategoriaService {
       data.estado = 'inactivo'
     }
     return this.http.put(`${this.baseUrl}/api/subcategoria/editar-subcategoria/${data.id}`, data);
+  }
+
+  userProfile(token: string){
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+
+    const options = { headers: headers };
+
+    return this.http.get(`${this.baseUrl}/api/auth/user-profile`, options);
   }
 
 }

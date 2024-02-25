@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubcategoriaService } from '../../service/subcategoria.service';
 declare var bootstrap: any;
 
@@ -16,7 +16,7 @@ export class FormularioComponent  implements OnInit{
   isAdmin:boolean = true
   mostrarCrear = true
 
-  categoria: any;
+  @Input() categorias: any;
 
   model = {
     id : '',
@@ -35,29 +35,23 @@ export class FormularioComponent  implements OnInit{
 
   constructor(private servicio: SubcategoriaService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    if(localStorage.getItem('rol') == 'basico'){
+      this.isAdmin = false
+    }
     this.myModal = new bootstrap.Modal(document.getElementById('modalSubcategoria'));
-    this.servicio.getCategoriaAll().subscribe((data) => {
-      setTimeout(() => {
-        this.categoria = data
-      }, 100);
-    });
   }
 
   async openModel(id: any){
     this.limpiarModal()
     if(id){
-      await this.servicio.getSubcategory(id).subscribe((data) => {
-        setTimeout(() => {
-          this.dataEdit = data;
-          this.mostrarCrear=false
-          this.model.id = this.dataEdit.response.id
-          this.model.nombre = this.dataEdit.response.name
-          this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
-          this.model.subcategoria = this.dataEdit.response.categoria_id
-          this.myModal.show();
-        }, 100);
-      });
+      this.dataEdit = await this.servicio.getSubcategory(id).toPromise()
+      this.mostrarCrear = false
+      this.model.id = this.dataEdit.response.id
+      this.model.nombre = this.dataEdit.response.name
+      this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
+      this.model.subcategoria = this.dataEdit.response.categoria_id
+      this.myModal.show();
     }else{
       this.limpiarModal()
       this.myModal.show();

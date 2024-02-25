@@ -23,6 +23,8 @@ export class CategoriasComponent implements OnInit {
         this.router.navigate(['/categorias']);
         localStorage.setItem('rol', this.user.rol)
       }else{
+        localStorage.removeItem('rol')
+        localStorage.removeItem('token')
         this.router.navigate(['/login']);
       }
     }else{

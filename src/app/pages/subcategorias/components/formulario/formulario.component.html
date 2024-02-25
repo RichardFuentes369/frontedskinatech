@@ -1,5 +1,5 @@
-<button *ngIf="isAdmin" class="btn btn-sm btn-primary me-2" (click)="openModel('')">
-	<div>Crear Subcategoria</div>
+<button class="btn btn-sm btn-primary me-2" (click)="openModel('')" *ngIf="isAdmin">
+	<div>Crear subcategoria</div>
 </button>
 
 <!-- Modal -->
@@ -22,7 +22,7 @@
                 <span>Categoria</span>
                 <select name="" id="" class="form-control" [(ngModel)]="model.subcategoria">
                   <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
-                  <option value="{{item.id}}" *ngFor="let item of categoria.response">{{item.name}}</option>
+                  <option value="{{item.id}}" *ngFor="let item of categorias.response">{{item.name}}</option>
                 </select>
             </div>
             <div class="modal-footer">

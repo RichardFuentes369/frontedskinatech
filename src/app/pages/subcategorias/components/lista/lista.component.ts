@@ -26,11 +26,9 @@ export class ListaComponent implements OnInit {
   constructor(private servicio: SubcategoriaService, private router: Router) { }
 
   ngOnInit(): void {
-    let token = localStorage.getItem('token')
-    if(token){
-      this.obtenerSubcategoria()
-    }else{
-      this.router.navigate(['/login']);
+    this.obtenerSubcategoria()
+    if(localStorage.getItem('rol') == 'basico'){
+      this.isAdmin = false
     }
   }
 
