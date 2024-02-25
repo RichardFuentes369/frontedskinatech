@@ -19,14 +19,14 @@ export class CategoriasComponent implements OnInit {
     let token = localStorage.getItem('token')
     if(token){
       this.user = await this.servicio.userProfile(token).toPromise()
-      if(this.user){
+      .then(data => {
         this.router.navigate(['/categorias']);
-        localStorage.setItem('rol', this.user.rol)
-      }else{
+      })
+      .catch(error => {
         localStorage.removeItem('rol')
         localStorage.removeItem('token')
         this.router.navigate(['/login']);
-      }
+      });
     }else{
       this.router.navigate(['/login']);
     }

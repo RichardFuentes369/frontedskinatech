@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit{
     .login(model)
     .subscribe((user: any) => {
       this.user = user
-      localStorage.setItem ('token', this.user.access_token)
+      localStorage.setItem('token', this.user.access_token)
+      localStorage.setItem('rol', this.user.user.rol)
       this.router.navigate(['/categorias']);
     });
   }

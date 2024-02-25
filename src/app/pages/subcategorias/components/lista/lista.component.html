@@ -58,11 +58,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of subcategorias.response.data">
-            <th scope="row" class="text-center">{{item.id}}</th>
-            <td class="text-center">{{item.name}}</td>
-            <td class="text-center">{{item.status}}</td>
-            <td class="text-center">{{item.categoria.name}}</td>
-            <td class="text-center">
+            <th *ngIf="item.categoria.status == 'activo'" scope="row" class="text-center">{{item.id}}</th>
+            <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.name}}</td>
+            <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.status}}</td>
+            <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.categoria.name}}</td>
+            <td *ngIf="item.categoria.status == 'activo'" class="text-center">
                 <button class="btn btn-sm btn-primary m-2" *ngIf="isAdmin" (click)="editar(item.id)">Editar</button>
                 <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin" (click)="eliminar(item.id)">Eliminar</button>
             </td>

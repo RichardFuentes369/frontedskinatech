@@ -22,7 +22,6 @@ export class SubcategoriasComponent implements OnInit   {
       this.user = await this.servicio.userProfile(token).toPromise()
       if(this.user){
         this.router.navigate(['/subcategorias']);
-        localStorage.setItem('rol', this.user.rol)
         this.categoria = await this.servicio.getCategoriaAll().toPromise()
       }else{
         localStorage.removeItem('rol')

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavbarService } from './service/navbar.service';
 @Component({
   selector: 'app-globales-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit{
   user:any = []
 
 
-  constructor(private servicio: NavbarService) { }
+  constructor(private servicio: NavbarService, private router: Router) { }
 
   async ngOnInit() {
     await this.loginInicial()
@@ -37,6 +38,13 @@ export class NavbarComponent implements OnInit{
       let partesRuta = ruta.split('/');
       this.ruta = partesRuta[1]
     }
+  }
+
+  salir(){
+    this.user = []
+    localStorage.removeItem('token')
+    localStorage.removeItem('rol')
+    this.router.navigate(['/login']);
   }
 
 

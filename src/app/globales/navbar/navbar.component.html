@@ -1,30 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top" *ngIf="user != ''">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="openToogle()">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-        <div class="navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="user != ''">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/categorias" routerLinkActive="claseActiva">
-            Categorias
-          </a>
+          Categorias
+        </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/subcategorias" routerLinkActive="active" ariaCurrentWhenActive="page" routerLinkActive="claseActiva">
-            Subcategorias
-          </a>
+          Subcategorias
+        </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/productos" routerLinkActive="claseActiva">
-            Productos
-          </a>
+          Productos
+        </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page" routerLinkActive="claseActiva">
-            Usuarios
-          </a>
+          Usuarios
+        </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" (click)="salir()">
+        Salir
+      </a>
                 </li>
             </ul>
         </div>
