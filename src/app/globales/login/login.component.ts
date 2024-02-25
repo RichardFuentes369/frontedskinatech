@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit{
       this.user = user
       localStorage.setItem('token', this.user.access_token)
       localStorage.setItem('rol', this.user.user.rol)
-      this.router.navigate(['/categorias']);
+      window.location.href = window.location.origin+'/categorias'
     });
   }
 
