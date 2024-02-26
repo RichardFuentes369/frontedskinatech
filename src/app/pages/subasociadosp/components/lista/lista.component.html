@@ -19,7 +19,7 @@
 
 <h3 class="text-center">Lista de asociados</h3>
 
-<!-- <div class="col-sm-12 text-end">
+<div class="col-sm-12 text-end">
     <select class="btn-group-vertical m-2" [(ngModel)]="field" (change)="cambiarSort()">
     <option value="id" selected>id</option>
     <option value="name">nombre</option>
@@ -40,35 +40,38 @@
     <option value="100">100</option>
   </select>
     <button class="btn btn-sm btn-primary m-2" (click)="disminuir()" [ngClass]="{
-    'disabled': categorias.response.back == null
+    'disabled': subAsociados.response.back == null
   }"><<</button>
     <button class="btn btn-sm btn-primary m-2" (click)="aumentar()" [ngClass]="{
-    'disabled': categorias.response.next == null
+    'disabled': subAsociados.response.next == null
   }">>></button>
-</div> -->
+</div>
 
-<!-- <table class="table">
+<table class="table">
     <thead>
         <tr>
             <th scope="col" class="text-center">#</th>
-            <th scope="col" class="text-center">Nombre</th>
-            <th scope="col" class="text-center">Estado</th>
-            <th scope="col" class="text-center">Cantidad de Subcategorias</th>
-            <th scope="col" class="text-center">Cantidad de Productos</th>
+            <th scope="col" class="text-center">Producto</th>
+            <th scope="col" class="text-center">Categoria</th>
+            <th scope="col" class="text-center">Subcategoria</th>
             <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of categorias.response.data">
+        <tr *ngFor="let item of subAsociados.response.data">
             <th scope="row" class="text-center">{{item.id}}</th>
-            <td class="text-center">{{item.name}}</td>
-            <td class="text-center">{{item.status}}</td>
-            <td class="text-center">{{item.cantidadSubcategorias}}</td>
-            <td class="text-center">{{item.cantidadProductos}}</td>
             <td class="text-center">
-                <button class="btn btn-sm btn-primary m-2" *ngIf="isAdmin" (click)="editar(item.id)">Editar</button>
+                {{(item.productos) ? item.productos.name : ''}}
+            </td>
+            <td class="text-center">
+                {{(item.categoria) ? item.categoria.name : ''}}
+            </td>
+            <td class="text-center">
+                {{(item.subcategoria) ? item.subcategoria.name : ''}}
+            </td>
+            <td class="text-center">
                 <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin" (click)="eliminar(item.id)">Eliminar</button>
             </td>
         </tr>
     </tbody>
-</table> -->
+</table>
