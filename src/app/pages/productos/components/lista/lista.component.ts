@@ -83,11 +83,14 @@ export class ListaComponent {
       })
       .catch((error) => {
         if (error.status === 401) {
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
           this.router.navigate(['/login']);
         }
       });
     }else{
-
+      localStorage.removeItem('rol')
+      localStorage.removeItem('token')
       this.router.navigate(['/login']);
     }
   }

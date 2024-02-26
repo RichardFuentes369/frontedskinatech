@@ -60,11 +60,15 @@ export class FormularioComponent  implements OnInit{
         .catch((error) => {
           if (error.status === 401) {
             this.closeModel()
+            localStorage.removeItem('rol')
+            localStorage.removeItem('token')
             this.router.navigate(['/login']);
           }
         });
       }else{
         this.closeModel()
+        localStorage.removeItem('rol')
+        localStorage.removeItem('token')
         this.router.navigate(['/login']);
       }
     }else{
@@ -87,11 +91,16 @@ export class FormularioComponent  implements OnInit{
       })
       .catch((error) => {
         if (error.status === 401) {
+          this.closeModel()
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
           this.router.navigate(['/login']);
         }
       });
     }else{
       this.closeModel()
+      localStorage.removeItem('rol')
+      localStorage.removeItem('token')
       this.router.navigate(['/login']);
     }
   }
@@ -108,11 +117,14 @@ export class FormularioComponent  implements OnInit{
       })
       .catch((error) => {
         if (error.status === 401) {
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
           this.router.navigate(['/login']);
         }
       });
     }else{
-      this.closeModel()
+      localStorage.removeItem('rol')
+      localStorage.removeItem('token')
       this.router.navigate(['/login']);
     }
   }

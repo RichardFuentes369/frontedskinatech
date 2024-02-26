@@ -55,11 +55,15 @@ export class FormularioComponent  implements OnInit{
         })
         .catch((error) => {
           if (error.status === 401) {
+            localStorage.removeItem('rol')
+            localStorage.removeItem('token')
             this.closeModel()
             this.router.navigate(['/login']);
           }
         });
       }else{
+        localStorage.removeItem('rol')
+        localStorage.removeItem('token')
         this.closeModel()
         this.router.navigate(['/login']);
       }
@@ -103,11 +107,15 @@ export class FormularioComponent  implements OnInit{
       })
       .catch((error) => {
         if (error.status === 401) {
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
           this.closeModel()
           this.router.navigate(['/login']);
         }
       });
     }else{
+      localStorage.removeItem('rol')
+      localStorage.removeItem('token')
       this.closeModel()
       this.router.navigate(['/login']);
     }
