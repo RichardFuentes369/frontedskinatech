@@ -50,4 +50,13 @@ export class SubasociadospService {
 
     return this.http.get(`${this.baseUrl}/api/auth/user-profile`, options);
   }
+
+  create(data: any, token:string) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+    const options = { headers: headers };
+
+    return this.http.post(`${this.baseUrl}/api/subcategorias-productos/asignar-subcategorias-productos`, data, options);
+  }
 }

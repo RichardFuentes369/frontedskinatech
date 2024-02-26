@@ -10,6 +10,8 @@ declare var bootstrap: any;
 })
 export class FormularioComponent {
 
+  @Output() asignacionGuardada: EventEmitter<void> = new EventEmitter<void>();
+
   myModal: any;
   dataEdit: any;
   isAdmin:boolean = true
@@ -20,18 +22,16 @@ export class FormularioComponent {
   @Input() productos: any;
 
   model = {
-    id : '',
-    categoria: '',
-    subcategoria: '',
-    productos: ''
+    categoria: null,
+    subcategoria: null,
+    productos: null
   }
 
   limpiarModal(){
-    this.model.id = ''
-    this.mostrarCrear=true
-    this.model.categoria = ''
-    this.model.subcategoria = ''
-    this.model.productos = ''
+    this.mostrarCrear = true
+    this.model.categoria = null
+    this.model.subcategoria = null
+    this.model.productos = null
   }
 
   constructor(private servicio: SubasociadospService, private router: Router) { }
@@ -45,38 +45,8 @@ export class FormularioComponent {
 
   async openModel(id: any){
     this.limpiarModal()
-    if(id){
-      let token = localStorage.getItem('token')
-      if(token){
-        this.myModal.show();
-        // await this.servicio.getSubcategory(id, token).toPromise()
-        // .then((response) => {
-        //   this.dataEdit = response
-        //   this.mostrarCrear = false
-        //   this.model.id = this.dataEdit.response.id
-        //   this.model.nombre = this.dataEdit.response.name
-        //   this.model.estado = (this.dataEdit.response.status == 'activo') ? 1 : 2
-        //   this.model.subcategoria = this.dataEdit.response.categoria_id.toString()
-        //   this.myModal.show();
-        // })
-        // .catch((error) => {
-        //   if (error.status === 401) {
-        //     localStorage.removeItem('rol')
-        //     localStorage.removeItem('token')
-        //     this.closeModel()
-        //     this.router.navigate(['/login']);
-        //   }
-        // });
-      }else{
-        localStorage.removeItem('rol')
-        localStorage.removeItem('token')
-        this.closeModel()
-        this.router.navigate(['/login']);
-      }
-    }else{
-      this.limpiarModal()
-      this.myModal.show();
-    }
+    this.limpiarModal()
+    this.myModal.show();
   }
 
   closeModel(){
@@ -86,24 +56,24 @@ export class FormularioComponent {
   async guardarSubCategoriaAsociado(){
     let token = localStorage.getItem('token')
     if(token){
-    //   await this.servicio.create(this.model, token).toPromise()
-    //   .then((response) => {
-    //     this.closeModel()
-    //     this.subcategoriaGuardada.emit();
-    //   })
-    //   .catch((error) => {
-    //     if (error.status === 401) {
-    //       this.closeModel()
-    //       localStorage.removeItem('rol')
-    //       localStorage.removeItem('token')
-    //       this.router.navigate(['/login']);
-    //     }
-    //   });
-    // }else{
-    //   this.closeModel()
-    //   localStorage.removeItem('rol')
-    //   localStorage.removeItem('token')
-    //   this.router.navigate(['/login']);
+      await this.servicio.create(this.model, token).toPromise()
+      .then((response) => {
+        this.closeModel()
+        this.asignacionGuardada.emit();
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          this.closeModel()
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
+          this.router.navigate(['/login']);
+        }
+      });
+    }else{
+      this.closeModel()
+      localStorage.removeItem('rol')
+      localStorage.removeItem('token')
+      this.router.navigate(['/login']);
     }
   }
 }

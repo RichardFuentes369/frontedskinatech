@@ -38,7 +38,7 @@ export class SubasociadospComponent {
   }
 
   @ViewChild(ListaComponentSubAsociadosP) child:any;
-  subcategoriaAsociadosGuardada() {
+  asignacionGuardada() {
     this.child.obtenerSubAsociados();
   }
 

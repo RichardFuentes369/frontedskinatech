@@ -11,20 +11,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <span>Producto</span>
+                <select name="" id="" class="form-control" [(ngModel)]="model.productos">
+                  <option value="" selected>--Seleccione--</option>
+                  <option value="{{item.id}}" *ngFor="let item of productos.response">{{item.name}}</option>
+                </select>
                 <span>Categoria</span>
                 <select name="" id="" class="form-control" [(ngModel)]="model.categoria">
-                  <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
+                  <option value="" selected>--Seleccione--</option>
                   <option value="{{item.id}}" *ngFor="let item of categorias.response">{{item.name}}</option>
                 </select>
                 <span>Subcategoria</span>
                 <select name="" id="" class="form-control" [(ngModel)]="model.subcategoria">
-                  <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
+                  <option value="" selected>--Seleccione--</option>
                   <option value="{{item.id}}" *ngFor="let item of subcategoria.response">{{item.name}}</option>
-                </select>
-                <span>Producto</span>
-                <select name="" id="" class="form-control" [(ngModel)]="model.productos">
-                  <option value="0" selected *ngIf="mostrarCrear == true">--Seleccione--</option>
-                  <option value="{{item.id}}" *ngFor="let item of productos.response">{{item.name}}</option>
                 </select>
             </div>
             <div class="modal-footer">
