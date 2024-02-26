@@ -10,9 +10,12 @@ export class NavbarComponent implements OnInit{
 
   ruta:string = ''
   user:any = []
+  rutaActual:any = ''
 
 
-  constructor(private servicio: NavbarService, private router: Router) { }
+  constructor(private servicio: NavbarService, private router: Router) {
+    this.rutaActual = router
+  }
 
   async ngOnInit() {
     await this.loginInicial()

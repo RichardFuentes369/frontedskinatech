@@ -3,8 +3,11 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="openToogle()">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-        <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="user != ''">
+        <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="
+          rutaActual.url == '/categorias' ||
+          rutaActual.url == '/subcategorias' ||
+          rutaActual.url == '/productos'
+        ">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/categorias" routerLinkActive="claseActiva">

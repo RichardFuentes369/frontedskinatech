@@ -83,16 +83,23 @@ export class FormularioComponent  implements OnInit{
       await this.servicio.create(this.model, token).toPromise()
       .then((response) => {
         this.closeModel()
+        localStorage.removeItem('token')
+        localStorage.removeItem('rol')
         this.categoriaGuardada.emit();
       })
       .catch((error) => {
         if (error.status === 401) {
+
           this.closeModel()
+          localStorage.removeItem('token')
+          localStorage.removeItem('rol')
           this.router.navigate(['/login']);
         }
       });
     }else{
       this.closeModel()
+      localStorage.removeItem('token')
+      localStorage.removeItem('rol')
       this.router.navigate(['/login']);
     }
   }
@@ -107,16 +114,16 @@ export class FormularioComponent  implements OnInit{
       })
       .catch((error) => {
         if (error.status === 401) {
+          this.closeModel()
           localStorage.removeItem('rol')
           localStorage.removeItem('token')
-          this.closeModel()
           this.router.navigate(['/login']);
         }
       });
     }else{
+      this.closeModel()
       localStorage.removeItem('rol')
       localStorage.removeItem('token')
-      this.closeModel()
       this.router.navigate(['/login']);
     }
   }
