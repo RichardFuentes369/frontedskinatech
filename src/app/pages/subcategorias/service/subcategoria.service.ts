@@ -48,6 +48,23 @@ export class SubcategoriaService {
     return this.http.post(`${this.baseUrl}/api/subcategoria/agregar-subcategoria`, data, options);
   }
 
+  updateChild(data:any, token:string) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+    const options = { headers: headers };
+
+    if(data.estado == 1 || data.estado == '1'){
+      data.estado = 'activo'
+    }
+    if(data.estado == 2 || data.estado == '2'){
+      data.estado = 'inactivo'
+    }
+
+    return this.http.put(`${this.baseUrl}/api/subcategorias-productos/editar-subcategoria-productos/${data.id}`, data, options);
+
+  }
+
   update(data: any, token: string) {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
@@ -60,6 +77,7 @@ export class SubcategoriaService {
     if(data.estado == 2 || data.estado == '2'){
       data.estado = 'inactivo'
     }
+
     return this.http.put(`${this.baseUrl}/api/subcategoria/editar-subcategoria/${data.id}`, data, options);
   }
 

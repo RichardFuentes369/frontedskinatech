@@ -1,54 +1,53 @@
-<div class="col-sm-12 row mb-4">
+<!-- <div class="col-sm-12 row mb-4">
     <div class="col-sm-5">
         <select [(ngModel)]="filtroelemento" class="form-control">
-        <option value="">Seleccione</option>
-        <option value="id">Id</option>
-        <option value="name">Nombre</option>
-        <option value="status">Estado</option>
-      </select>
+      <option value="">Seleccione</option>
+      <option value="id">Id</option>
+      <option value="name">Nombre</option>
+      <option value="status">Estado</option>
+    </select>
     </div>
     <div class="col-sm-5">
         <input type="text" class="form-control" placeholder="busqueda" [(ngModel)]="filtropalabra">
     </div>
     <div class="col-sm text-center m-auto">
         <button class="btn btn-sm btn-secondary" (click)="filtro()">
-          Buscar
-        </button>
+        Buscar
+      </button>
     </div>
-</div>
+</div> -->
 
-<h3 class="text-center">Lista de categorias</h3>
+<h3 class="text-center">Lista de asociados</h3>
 
-<!-- {{categorias.response.back|json}} {{categorias.response.next|json}} -->
-<div class="col-sm-12 text-end">
+<!-- <div class="col-sm-12 text-end">
     <select class="btn-group-vertical m-2" [(ngModel)]="field" (change)="cambiarSort()">
-      <option value="id" selected>id</option>
-      <option value="name">nombre</option>
-      <option value="status">estado</option>
-    </select>
+    <option value="id" selected>id</option>
+    <option value="name">nombre</option>
+    <option value="status">estado</option>
+  </select>
     <select class="btn-group-vertical m-2" [(ngModel)]="order" (change)="cambiarSort()">
-      <option value="asc" selected>asc</option>
-      <option value="desc">desc</option>
-    </select>
+    <option value="asc" selected>asc</option>
+    <option value="desc">desc</option>
+  </select>
     <select class="btn-group-vertical m-2" [(ngModel)]="perPage" (change)="cambiarPaginacion()">
-      <option value="5" selected>5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-    </select>
+    <option value="5" selected>5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
     <button class="btn btn-sm btn-primary m-2" (click)="disminuir()" [ngClass]="{
-      'disabled': categorias.response.back == null
-    }"><<</button>
+    'disabled': categorias.response.back == null
+  }"><<</button>
     <button class="btn btn-sm btn-primary m-2" (click)="aumentar()" [ngClass]="{
-      'disabled': categorias.response.next == null
-    }">>></button>
-</div>
+    'disabled': categorias.response.next == null
+  }">>></button>
+</div> -->
 
-<table class="table">
+<!-- <table class="table">
     <thead>
         <tr>
             <th scope="col" class="text-center">#</th>
@@ -72,4 +71,4 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->

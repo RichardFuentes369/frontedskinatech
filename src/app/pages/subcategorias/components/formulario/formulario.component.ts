@@ -48,8 +48,9 @@ export class FormularioComponent  implements OnInit{
     if(id){
       let token = localStorage.getItem('token')
       if(token){
-        this.dataEdit = await this.servicio.getSubcategory(id, token).toPromise()
+        await this.servicio.getSubcategory(id, token).toPromise()
         .then((response) => {
+          this.dataEdit = response
           this.mostrarCrear = false
           this.model.id = this.dataEdit.response.id
           this.model.nombre = this.dataEdit.response.name
@@ -59,16 +60,16 @@ export class FormularioComponent  implements OnInit{
         })
         .catch((error) => {
           if (error.status === 401) {
-            this.closeModel()
             localStorage.removeItem('rol')
             localStorage.removeItem('token')
+            this.closeModel()
             this.router.navigate(['/login']);
           }
         });
       }else{
-        this.closeModel()
         localStorage.removeItem('rol')
         localStorage.removeItem('token')
+        this.closeModel()
         this.router.navigate(['/login']);
       }
     }else{
@@ -110,6 +111,15 @@ export class FormularioComponent  implements OnInit{
 
     let token = localStorage.getItem('token')
     if(token){
+      await this.servicio.updateChild(this.model, token).toPromise()
+      .catch((error) => {
+        if (error.status === 401) {
+          this.closeModel()
+          localStorage.removeItem('rol')
+          localStorage.removeItem('token')
+          this.router.navigate(['/login']);
+        }
+      });
       await this.servicio.update(this.model, token).toPromise()
       .then((response) => {
         this.closeModel()

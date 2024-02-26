@@ -53,6 +53,7 @@
             <th scope="col" class="text-center">Nombre</th>
             <th scope="col" class="text-center">Estado</th>
             <th scope="col" class="text-center">Categoria Padre</th>
+            <th scope="col" class="text-center">Cantidad de Productos</th>
             <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
         </tr>
     </thead>
@@ -62,6 +63,7 @@
             <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.name}}</td>
             <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.status}}</td>
             <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.categoria.name}}</td>
+            <td *ngIf="item.categoria.status == 'activo'" class="text-center">{{item.cantidadProductos}}</td>
             <td *ngIf="item.categoria.status == 'activo'" class="text-center">
                 <button class="btn btn-sm btn-primary m-2" *ngIf="isAdmin" (click)="editar(item.id)">Editar</button>
                 <button class="btn btn-sm btn-primary m-2 " *ngIf="isAdmin" (click)="eliminar(item.id)">Eliminar</button>

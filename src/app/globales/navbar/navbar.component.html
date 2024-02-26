@@ -6,28 +6,33 @@
         <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="
           rutaActual.url == '/categorias' ||
           rutaActual.url == '/subcategorias' ||
-          rutaActual.url == '/productos'
+          rutaActual.url == '/productos' ||
+          rutaActual.url == '/asociar'
         ">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/categorias" routerLinkActive="claseActiva">
-          Categorias
-        </a>
+            Categorias
+          </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/subcategorias" routerLinkActive="active" ariaCurrentWhenActive="page" routerLinkActive="claseActiva">
-          Subcategorias
-        </a>
+            Subcategorias
+          </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" routerLink="/productos" routerLinkActive="claseActiva">
-          Productos
-        </a>
+            Productos
+          </a>
                     <li class="nav-item">
-                        <a class="nav-link text-white" (click)="salir()">
-        Salir
-      </a>
-                    </li>
+                        <a class="nav-link text-white" routerLink="/asociar" routerLinkActive="claseActiva">
+            Asociar productos
+          </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" (click)="salir()">
+            Salir
+          </a>
+                        </li>
             </ul>
         </div>
     </div>
